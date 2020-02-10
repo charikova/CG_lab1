@@ -6,8 +6,8 @@
 
 
 BlackImage::BlackImage(unsigned short width, unsigned short height):
-    width(width),
-    height(height)
+        width(width),
+        height(height)
 {
     frame_buffer.reserve(width * height);
 }

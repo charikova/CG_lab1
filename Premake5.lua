@@ -1,46 +1,46 @@
 workspace "Computer Graphics"
-   configurations { "Debug", "Release" }
-   language "C++"
-   architecture "x64"
-   systemversion "latest"
-   toolset "v142"
-   optimize "Speed"
-   filter "configurations:Debug"
-      defines { "DEBUG" }
-      symbols "On"
+configurations { "Debug", "Release" }
+language "C++"
+architecture "x64"
+systemversion "latest"
+toolset "v141"
+optimize "Speed"
+filter "configurations:Debug"
+defines { "DEBUG" }
+symbols "On"
 
-   filter "configurations:Release"
-      defines { "NDEBUG" }
-      optimize "On"
+filter "configurations:Release"
+defines { "NDEBUG" }
+optimize "On"
 
-   targetdir ("bin/%{prj.name}/%{cfg.longname}")
-   objdir ("obj/%{prj.name}/%{cfg.longname}")
+targetdir ("bin/%{prj.name}/%{cfg.longname}")
+objdir ("obj/%{prj.name}/%{cfg.longname}")
 
 
 group "01. Black image"
-   project "Black image lib"
-      kind "StaticLib"
-      includedirs { "src/" }
-      includedirs { "lib/stb" }
-      includedirs { "lib/linalg"}
-      files { "lib/stb/stb_image_write.h", "lib/linalg/linalg.h",  "src/structs.h", "src/black_image.h", "src/black_image.cpp" }
-   
-   project "Black image app"
-      kind "ConsoleApp"
-      includedirs { "src" }
-      includedirs { "lib/linalg"}
-      links "Black image lib"
-      files { "src/black_image_main.cpp" }
-   
-   project "Black image tests"
-      kind "ConsoleApp"
-      includedirs { "src" }
-      includedirs { "lib/stb" }
-      includedirs { "lib/linalg"}
-      includedirs { "lib/catch2/single_include/catch2" }
-      files { "lib/stb/stb_image.h", "tests/utils.h", "tests/black_image_tests.cpp" }
-      links "Black image lib"
-      debugargs { "--benchmark-samples", "25" }
+project "Black image lib"
+kind "StaticLib"
+includedirs { "src/" }
+includedirs { "lib/stb" }
+includedirs { "lib/linalg"}
+files { "lib/stb/stb_image_write.h", "lib/linalg/linalg.h",  "src/structs.h", "src/black_image.h", "src/black_image.cpp" }
+
+project "Black image app"
+kind "ConsoleApp"
+includedirs { "src" }
+includedirs { "lib/linalg"}
+links "Black image lib"
+files { "src/black_image_main.cpp" }
+
+project "Black image tests"
+kind "ConsoleApp"
+includedirs { "src" }
+includedirs { "lib/stb" }
+includedirs { "lib/linalg"}
+includedirs { "lib/catch2/single_include/catch2" }
+files { "lib/stb/stb_image.h", "tests/utils.h", "tests/black_image_tests.cpp" }
+links "Black image lib"
+debugargs { "--benchmark-samples", "25" }
 --[[
 group "02. Color space"
    project "Color space lib"
